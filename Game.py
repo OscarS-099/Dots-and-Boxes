@@ -7,13 +7,17 @@ class Game:
     P2 = 'P2'
     EMPTY = " "
     DRAW = auto()
+    VTCL = "|"
+    HZTL = "--"
 
     def __init__(self,dim):
         self._dim = dim
-        self._rowLines = [[self.EMPTY for _ in range(self._dim - 1)] for _ in range(self._dim)]
-        self._colLines = [[self.EMPTY for _ in range(self._dim)] for _ in range(self._dim - 1)]
-        self._boxes = [[self.EMPTY for _ in range(self._dim - 1)] for _ in range(self._dim - 1)]
+        self._rowLines = [[self.EMPTY for _ in range(self._dim-1)] for _ in range(self._dim)]
+        self._colLines = [[self.EMPTY for _ in range(self._dim)] for _ in range(self._dim-1)]
+        self._boxes = [[self.EMPTY for _ in range(self._dim-1)] for _ in range(self._dim-1)]
         self._player = self.P1
+        self._P1pts = 0
+        self._P2pts = 0
 
     def __repr__(self):
         printable = "\n  "
@@ -26,13 +30,20 @@ class Game:
             printable += ".\n  "
             try:
                 for p in range(len(self._colLines[i])):
-                    printable += self._colLines[i][p] + self._boxes[i][p].rjust(2)
+                    printable += self._colLines[i][p]
+                    printable += self._boxes[i][p].rjust(2)
             except IndexError:
                 pass
+        printable += f"\n{self._player} it's your turn\n"
         return printable
 
     def play(self, fr, to):
-        pass
+        if fr[0] == to[0]:
+            self._colLines[min(fr[1],to[1])][fr[0]] = self.VTCL
+        elif fr[1] == to[1]:
+            self._rowLines[fr[1]][min(fr[0],to[0])] = self.HZTL
+        print(self._colLines)
+        print(self._rowLines)
 
     @property
     def winner(self):
