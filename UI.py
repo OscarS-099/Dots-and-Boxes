@@ -19,7 +19,7 @@ class Terminal(Ui):
         self._game = Game(4)
 
     def run(self):
-        while True:
+        while not self._game.winner:
             print(self._game)
             fr = input("Enter line start coordinates in the form x,y: ").split(",")
             to = input("Enter line end coordinates in the form x,y: ").split(",")
@@ -27,6 +27,11 @@ class Terminal(Ui):
                 fr[i] = int(fr[i])-1
                 to[i] = int(to[i])-1
             self._game.play(fr,to)
+        print(self._game)
+        if self._game.winner != Game.DRAW:
+            print(f"{self._game.winner} won")
+        else:
+            print("It's a draw")
 
 if __name__ == "__main__":
     # For unit testing
