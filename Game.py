@@ -33,7 +33,8 @@ class Game:
                     printable += self._boxes[i][p].rjust(2)
             except IndexError:
                 pass
-        printable += f"\n{self._player} it's your turn\n"
+        if not self.winner:
+            printable += f"\n{self._player} it's your turn\n"
         return printable
 
     def play(self, fr, to):
@@ -85,6 +86,20 @@ class Game:
             if switch[0] and switch[1]:
                 self._player = self.P1 if self._player == self.P2 else self.P2
 
+    def getScore(self, player):
+        return self._points[player]
+
+    def getDim(self):
+        return self._dim
+
+    def occupied(self, fr, to):
+        row = min(to[1], fr[1])
+        col = min(to[0], fr[0])
+        if fr[0] == to[0]:
+            return not self._colLines[row][col] == self.EMPTY
+        else:
+            return not self._rowLines[row][col] == self.EMPTY
+
     @property
     def winner(self):
         for i in range(self._dim):
@@ -105,7 +120,6 @@ class Game:
         elif self._points[self.P1] < self._points[self.P2]:
             return self.P2
         return self.DRAW
-
 if __name__ == "__main__":
     # For unit testing
     pass
