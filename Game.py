@@ -3,20 +3,26 @@ from enum import auto
 class Game:
 
     #Constants
-    P1 = 'P1'
-    P2 = 'P2'
     EMPTY = " "
     DRAW = auto()
     VTCL = "|"
     HZTL = "--"
 
-    def __init__(self,dim):
+    def __init__(self,dim,P1,P2):
+        self._P1 = P1
+        self._P2 = P2
         self._dim = dim
         self._rowLines = [[self.EMPTY for _ in range(self._dim-1)] for _ in range(self._dim)]
         self._colLines = [[self.EMPTY for _ in range(self._dim)] for _ in range(self._dim-1)]
         self._boxes = [[self.EMPTY for _ in range(self._dim-1)] for _ in range(self._dim-1)]
-        self._player = self.P1
-        self._points = {self.P1:0, self.P2:0}
+        self._player = self._P1
+        self._points = {self._P1:0, self._P2:0}
+
+    def getP1Name(self):
+        return self._P1
+
+    def getP2Name(self):
+        return self._P2
 
     def __repr__(self):
         printable = "\n  "
@@ -81,10 +87,10 @@ class Game:
                     switch.append(True)
         if len(switch) == 1:
             if switch[0]:
-                self._player = self.P1 if self._player == self.P2 else self.P2
+                self._player = self._P1 if self._player == self._P2 else self._P2
         else:
             if switch[0] and switch[1]:
-                self._player = self.P1 if self._player == self.P2 else self.P2
+                self._player = self._P1 if self._player == self._P2 else self._P2
 
     def getScore(self, player):
         return self._points[player]
@@ -115,10 +121,10 @@ class Game:
                         return None
             except IndexError:
                 pass
-        if self._points[self.P1] > self._points[self.P2]:
-            return self.P1
-        elif self._points[self.P1] < self._points[self.P2]:
-            return self.P2
+        if self._points[self._P1] > self._points[self._P2]:
+            return self._P1
+        elif self._points[self._P1] < self._points[self._P2]:
+            return self._P2
         return self.DRAW
 if __name__ == "__main__":
     # For unit testing
