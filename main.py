@@ -2,6 +2,7 @@ from UI import Gui, Terminal
 from sys import argv
 
 def usage():
+    #When calling the program, g or t is inputted alongside the program call
     print(f"""
 Usage: {argv[0]} [g | t]
 g : play with the GUI

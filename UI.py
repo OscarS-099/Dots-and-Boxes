@@ -24,6 +24,7 @@ class Terminal(Ui):
         while again == "Y":
             dim = 12
             while dim < 3 or dim > 10:
+                #Taking and validating input for dimension is in range
                 try:
                     dim = int(input("Enter the dimension of the board (between 3 and 10 inclusive): "))
                 except ValueError:
@@ -33,10 +34,13 @@ class Terminal(Ui):
             while not self._game.winner:
                 print(self._game)
                 while True:
+                    #Inputting line
                     fr = input("Enter line start coordinates in the form x,y: ").split(",")
                     to = input("Enter line end coordinates in the form x,y: ").split(",")
+                    #Validating input
                     try:
                         for i in range(2):
+                            #Converting input to integers
                             fr[i] = int(fr[i])-1
                             to[i] = int(to[i])-1
                             if fr[i] > self._game.getDim() or fr[i] < 0 or to[i] > self._game.getDim() or to[i] < 0:
@@ -54,6 +58,7 @@ class Terminal(Ui):
                     break
                 self._game.play(fr,to)
             print(self._game)
+            #If the game is won, print out the victory message
             if self._game.winner != Game.DRAW:
                 print(f"{self._game.winner} won")
                 print(f"The score was: {self._game.getP1Name()} - {self._game.getScore(self._game.getP1Name())}, {self._game.getP2Name()} - {self._game.getScore(self._game.getP2Name())}")
@@ -65,6 +70,7 @@ class Terminal(Ui):
             else:
                 print("It's a draw")
             while True:
+                #Checking if they'd like a rematch
                 again = input("Would you like to play again (y/n)? ")
                 try:
                     again = again.upper()

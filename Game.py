@@ -5,6 +5,7 @@ class Game:
     #Constants
     EMPTY = " "
     DRAW = auto()
+    #Using enum.auto() allows me to generate an inconsequential value for a draw
     VTCL = "|"
     HZTL = "--"
 
@@ -14,9 +15,11 @@ class Game:
         self._dim = dim
         self._rowLines = [[self.EMPTY for _ in range(self._dim-1)] for _ in range(self._dim)]
         self._colLines = [[self.EMPTY for _ in range(self._dim)] for _ in range(self._dim-1)]
+        #Using seperate 2D arrays for row and column lines allows clearer indexing for lines
         self._boxes = [[self.EMPTY for _ in range(self._dim-1)] for _ in range(self._dim-1)]
         self._player = self._P1
         self._points = {self._P1:0, self._P2:0}
+        #Using a dictionary for points makes referencing easier than two separate variables
 
     def getP1Name(self):
         return self._P1
@@ -25,6 +28,7 @@ class Game:
         return self._P2
 
     def __repr__(self):
+        #This is where the program constructs the printable game board
         printable = "\n  "
         for i in range(self._dim):
             printable += str(i+1) + "  "
@@ -44,6 +48,7 @@ class Game:
         return printable
 
     def play(self, fr, to):
+        #This is where lines are placed after being validated in UI class
         row = min(fr[1],to[1])
         col = min(fr[0],to[0])
         sides = []
@@ -62,6 +67,7 @@ class Game:
         self.checkBox(row, col, sides)
 
     def checkBox(self, row, col, sides):
+        #This is where whether a placed line forms a square
         switch = []
         for side in sides:
             if side == "r" or side == "d":
@@ -85,6 +91,7 @@ class Game:
                     switch.append(False)
                 else:
                     switch.append(True)
+        #Deciding whether to switch whose turn it is or not
         if len(switch) == 1:
             if switch[0]:
                 self._player = self._P1 if self._player == self._P2 else self._P2
@@ -99,6 +106,7 @@ class Game:
         return self._dim
 
     def occupied(self, fr, to):
+        #This is where the UI class can check if a space is free
         row = min(to[1], fr[1])
         col = min(to[0], fr[0])
         if fr[0] == to[0]:
@@ -108,7 +116,9 @@ class Game:
 
     @property
     def winner(self):
+        #This is where the program decides if there is a winner yet
         for i in range(self._dim):
+            #Checking if all posible lines have been played
             try:
                 for line in self._rowLines[i]:
                     if line == self.EMPTY:
@@ -121,6 +131,7 @@ class Game:
                         return None
             except IndexError:
                 pass
+        #Deciding the winner
         if self._points[self._P1] > self._points[self._P2]:
             return self._P1
         elif self._points[self._P1] < self._points[self._P2]:
