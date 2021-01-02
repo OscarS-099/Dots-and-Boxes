@@ -3,20 +3,20 @@ from enum import auto
 class Game:
 
     #Constants
-    EMPTY = " "
+    EMPTY = ' '
     DRAW = auto()
     #Using enum.auto() allows me to generate an inconsequential value for a draw
-    VTCL = "|"
-    HZTL = "--"
+    VTCL = '|'
+    HZTL = '--'
 
     def __init__(self,dim,P1,P2):
         self._P1 = P1
         self._P2 = P2
         self._dim = dim
-        self._rowLines = [[self.EMPTY for _ in range(self._dim-1)] for _ in range(self._dim)]
-        self._colLines = [[self.EMPTY for _ in range(self._dim)] for _ in range(self._dim-1)]
+        self._rowLines = [[Game.EMPTY for _ in range(self._dim-1)] for _ in range(self._dim)]
+        self._colLines = [[Game.EMPTY for _ in range(self._dim)] for _ in range(self._dim-1)]
         #Using seperate 2D arrays for row and column lines allows clearer indexing for lines
-        self._boxes = [[self.EMPTY for _ in range(self._dim-1)] for _ in range(self._dim-1)]
+        self._boxes = [[Game.EMPTY for _ in range(self._dim-1)] for _ in range(self._dim-1)]
         self._player = self._P1
         self._points = {self._P1:0, self._P2:0}
         #Using a dictionary for points makes referencing easier than two separate variables
@@ -29,14 +29,14 @@ class Game:
 
     def __repr__(self):
         #This is where the program constructs the printable game board
-        printable = "\n  "
+        printable = '\n  '
         for i in range(self._dim):
-            printable += str(i+1) + "  "
+            printable += str(i+1) + '  '
         for i in range(self._dim):
-            printable += f"\n{i+1} "
+            printable += f'\n{i+1} '
             for p in self._rowLines[i]:
-                printable += "." + p.rjust(2)
-            printable += ".\n  "
+                printable += '.' + p.rjust(2)
+            printable += '.\n  '
             try:
                 for p in range(len(self._colLines[i])):
                     printable += self._colLines[i][p]
@@ -44,7 +44,7 @@ class Game:
             except IndexError:
                 pass
         if not self.winner:
-            printable += f"\n{self._player} it's your turn\n"
+            printable += f'\n{self._player} it\'s your turn\n'
         return printable
 
     def play(self, fr, to):
@@ -53,39 +53,39 @@ class Game:
         col = min(fr[0],to[0])
         sides = []
         if fr[0] == to[0]:
-            self._colLines[row][col] = self.VTCL
+            self._colLines[row][col] = Game.VTCL
             if col < self._dim-1:
-                sides.append("r")
+                sides.append('r')
             if col > 0:
-                sides.append("l")
+                sides.append('l')
         elif fr[1] == to[1]:
-            self._rowLines[row][col] = self.HZTL
+            self._rowLines[row][col] = Game.HZTL
             if row < self._dim-1:
-                sides.append("d")
+                sides.append('d')
             if row > 0:
-                sides.append("u")
+                sides.append('u')
         self.checkBox(row, col, sides)
 
     def checkBox(self, row, col, sides):
         #This is where whether a placed line forms a square
         switch = []
         for side in sides:
-            if side == "r" or side == "d":
-                if self._colLines[row][col] != self.EMPTY and self._colLines[row][col+1] != self.EMPTY and self._rowLines[row][col] != self.EMPTY and self._rowLines[row+1][col] != self.EMPTY:
+            if side == 'r' or side == 'd':
+                if self._colLines[row][col] != Game.EMPTY and self._colLines[row][col+1] != Game.EMPTY and self._rowLines[row][col] != Game.EMPTY and self._rowLines[row+1][col] != Game.EMPTY:
                     self._boxes[row][col] = self._player
                     self._points[self._player] += 1
                     switch.append(False)
                 else:
                     switch.append(True)
-            elif side == "l":
-                if self._colLines[row][col] != self.EMPTY and self._colLines[row][col-1] != self.EMPTY and self._rowLines[row][col-1] != self.EMPTY and self._rowLines[row+1][col-1] != self.EMPTY:
+            elif side == 'l':
+                if self._colLines[row][col] != Game.EMPTY and self._colLines[row][col-1] != Game.EMPTY and self._rowLines[row][col-1] != Game.EMPTY and self._rowLines[row+1][col-1] != Game.EMPTY:
                     self._boxes[row][col-1] = self._player
                     self._points[self._player] += 1
                     switch.append(False)
                 else:
                     switch.append(True)
-            elif side == "u":
-                if self._colLines[row-1][col] != self.EMPTY and self._colLines[row-1][col+1] != self.EMPTY and self._rowLines[row][col] != self.EMPTY and self._rowLines[row-1][col] != self.EMPTY:
+            elif side == 'u':
+                if self._colLines[row-1][col] != Game.EMPTY and self._colLines[row-1][col+1] != Game.EMPTY and self._rowLines[row][col] != Game.EMPTY and self._rowLines[row-1][col] != Game.EMPTY:
                     self._boxes[row-1][col] = self._player
                     self._points[self._player] += 1
                     switch.append(False)
@@ -110,9 +110,23 @@ class Game:
         row = min(to[1], fr[1])
         col = min(to[0], fr[0])
         if fr[0] == to[0]:
-            return not self._colLines[row][col] == self.EMPTY
+            return not self._colLines[row][col] == Game.EMPTY
         else:
-            return not self._rowLines[row][col] == self.EMPTY
+            return not self._rowLines[row][col] == Game.EMPTY
+
+    def at(self, fr, to):
+        #This is where the GUI class can display whether there is a line present at a given loaction
+        row = min(to[1], fr[1])
+        col = min(to[0], fr[0])
+        if fr[0] == to[0]:
+            return self._colLines[row][col]
+        else:
+            return self._rowLines[row][col]
+
+    def boxOwner(self,coord):
+        #This is where the GUI class can check who has captured a box
+        print(coord[0],coord[1],self._boxes[coord[0]][coord[1]])
+        return self._boxes[coord[0]][coord[1]]
 
     @property
     def winner(self):
@@ -121,13 +135,13 @@ class Game:
             #Checking if all posible lines have been played
             try:
                 for line in self._rowLines[i]:
-                    if line == self.EMPTY:
+                    if line == Game.EMPTY:
                         return None
             except IndexError:
                 pass
             try:
                 for line in self._colLines[i]:
-                    if line == self.EMPTY:
+                    if line == Game.EMPTY:
                         return None
             except IndexError:
                 pass
@@ -136,7 +150,8 @@ class Game:
             return self._P1
         elif self._points[self._P1] < self._points[self._P2]:
             return self._P2
-        return self.DRAW
-if __name__ == "__main__":
+        return Game.DRAW
+
+if __name__ == '__main__':
     # For unit testing
     pass
