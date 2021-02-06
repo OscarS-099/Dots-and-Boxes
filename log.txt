@@ -1,0 +1,97 @@
+commit a3619ac282a1e793bb90321037b33c218f7bee7a
+Author: Chimera099 <oscar.stanford@icloud.com>
+Date:   Sat Feb 6 10:03:07 2021 +0000
+
+    Commented code fully. Project complete
+
+commit e6fb0f8bdf4a79e77a5d5b71dc1f13a3c9664215
+Author: Chimera099 <oscar.stanford@icloud.com>
+Date:   Tue Jan 26 08:51:08 2021 +0000
+
+    Completed numbered objectives 21: Pressing a button that is black should not cause the window to be updated and the player to forfeit their turn, 29:Pressing the 'Help' button should open a new window that should display the rules and have a 'Dismiss' button, 30:Pressing the 'Dismiss' button in the help window should cause the help window to disappear, 31:When the 'Play Game' button is pressed, an options window is opened where the user is prompted to input the grid size using a dropdown box for dimension (square board), 32:A 'Play' button which dismisses the option window and opens the game window with the options choses should be at the bottom of the options window, 33:There should be a running total of how many squares each player has, 34:In the options window, the player should be able to choose AI difficulty and which player they play using check boxes and dropdown boxes, 35:The easy AI should build a tree 1 ply deep and choose the highest ranked branch, 36:The medium AI should build a tree 3 plies deep and choose the highest ranked branch, 37:The hard AI should build a tree 5 plies deep and choose according to the highest ranked branch
+
+commit 8365b65a58ee24d2bdcd7dd3daca04e7658a6177
+Author: Chimera099 <oscar.stanford@icloud.com>
+Date:   Sat Jan 2 10:51:59 2021 +0000
+
+    Completed Numbered Objectives 17: Should present a GUI with buttons to display 'Help' text, to 'Play Game', or to 'Quit', 18:Pressing the 'Quit' button at any time should cause the GUI window to disappear and the program to end, 19:Pressing the 'Play Game' button should cause a separate game window to appear which shows a 4x4 grid of lines shaped buttons separated by dots and a 'Dismiss' button, 20:Pressing a button should cause the cell to go black, 22:If a box is surrounded on all four sides, the box should display either P1 or P2, depending on who captured it, 23:The GUI should include a text box area into which messages from the game can be displayed, with a scroll bar, 24:Pressing a button that is black in the game window should cause an error message to be displayed in the main window text area, 25:If the game is won or drawn, a message should be displayed to that effect in the main window text area, 26:When a game is won, subsequent clicks on buttons should have no effect, 27:While a game is in progress, further clicks on the 'Play Game' button should have no effect, 28:If the game window is resized, the cells that comprise the game board should grow or shrink accordingly
+
+commit adfd50a715f4ce7eb86aea65bbb491fa466c2750
+Author: Oscar Stanford <oestanford@perse.co.uk>
+Date:   Wed Nov 18 13:04:53 2020 +0000
+
+    Commented code so far
+
+commit b60e822648a178a52e7d86ca9aa51f787601a2a9
+Author: Oscar Stanford <oestanford@perse.co.uk>
+Date:   Fri Sep 18 17:40:50 2020 +0100
+
+    Completed numbered objective 17: Should offer to play again and store which player won, and therein keep a running total of how many games each player has won, if replayed, the player who goes first is switched, replaced player name constant with variable ahead of further objectives, fixed some bugs in the validation
+
+commit e9c21c4c664a175cbd60754ed1a31091cbd4992c
+Author: Oscar Stanford <oestanford@perse.co.uk>
+Date:   Sat Sep 12 09:46:46 2020 +0100
+
+    Completed numbered objectives 14:       14. Must validate inputted positions to make sure that the point exists, that there isn't already a line there and that the line is one unit length. The player should be able to re-enter inputs if they enter incorrectly, 15: Player should be able to select board dimension (square board) and 16: Should print the final scores when game is up as well as who won
+
+commit e7d6fc88a4db99368c2344b6c4596ef8aac4ff47
+Merge: 7e7f903 28dd67b
+Author: Oscar Stanford <oestanford@perse.co.uk>
+Date:   Fri Sep 11 16:00:18 2020 +0100
+
+    Merge branch 'Terminal' of https://github.com/OscarS-099/Dots-and-Boxes into Terminal
+
+commit 7e7f90312761b3ea08f541fb0c5882dee791840e
+Author: Oscar Stanford <oestanford@perse.co.uk>
+Date:   Fri Sep 11 16:00:10 2020 +0100
+
+    Removed debugging print statements from previous commit, slightly edited input system and scoring variable. Completed numbered objectives 4: When a box is made from the inputted lines, must signify which player made it by printing a P1 or P2 in the box, 5: When a box is made from the inputted lines, must signify which player made it by printing a P1 or P2 in the box, 6: Must output which player wins - which player has more points - at the end of the game, and end the program, 7: The game is finished when all possible lines are placed, 8: A player scores a point by capturing a box, the player with the most points wins, 9: A player gets another turn if they capture a square and 10: A square is captured if four lines make a square, with no dots within; i.e. it has to be a 1x1 square
+
+commit 28dd67b570f9f390d2e3e1f2aae715058df05b36
+Merge: 14e3bed 3035e6e
+Author: Oscar Stanford <oestanford@perse.co.uk>
+Date:   Fri Sep 11 15:58:48 2020 +0100
+
+    Merge branch 'Terminal' of https://github.com/OscarS-099/Dots-and-Boxes into Terminal
+
+commit 14e3beddd0ff30ce10f4447409347f9af020f8d4
+Author: Oscar Stanford <oestanford@perse.co.uk>
+Date:   Fri Sep 11 15:58:44 2020 +0100
+
+    Removed debugging print statements from previous commit, slightly edited input system and scoring variable. Completed numbered objectives 4: When a box is made from the inputted lines, must signify which player made it by printing a P1 or P2 in the box, 5: When a box is made from the inputted lines, must signify which player made it by printing a P1 or P2 in the box, 6: Must output which player wins - which player has more points - at the end of the game, and end the program, 7: The game is finished when all possible lines are placed, 8: A player scores a point by capturing a box, the player with the most points wins, 9: A player gets another turn if they capture a square and 10: A square is captured if four lines make a square, with no dots within; i.e. it has to be a 1x1 square
+
+commit 3035e6eaf23e04273005c53e97bd607e0a996e67
+Author: Oscar Stanford <oestanford@perse.co.uk>
+Date:   Thu Aug 20 14:46:06 2020 +0100
+
+    Removed debugging print statements from previous commit, slightly edited input system and scoring variable. Completed numbered objectives 4: When a box is made from the inputted lines, must signify which player made it by printing a P1 or P2 in the box, 5: When a box is made from the inputted lines, must signify which player made it by printing a P1 or P2 in the box, 6: Must output which player wins - which player has more points - at the end of the game, and end the program, 7: The game is finished when all possible lines are placed, 8: A player scores a point by capturing a box, the player with the most points wins, 9: A player gets another turn if they capture a square and 10: A square is captured if four lines make a square, with no dots within; i.e. it has to be a 1x1 square
+
+commit 847bc1b3bd84d16df1c93d541712225e2a86cbe0
+Author: Oscar Stanford <oestanford@perse.co.uk>
+Date:   Wed Aug 19 11:53:35 2020 +0100
+
+    Completed numbered objectives 3: Must fill in gaps between dots with lines whose position is inputted by the players in the form of a from coordinate and a to coordinate, 11: Must re-print grid with filled in lines after each turn and 12: Must print who's turn it is before collecting input in the form of coordinates
+
+commit ae14b836dd74a67c79d25a73e600e697b4ba097b
+Author: Oscar Stanford <oestanford@perse.co.uk>
+Date:   Tue Jul 28 14:24:15 2020 +0100
+
+    Completed numered objectives 1: Must print a 4x4 grid of full stops onto the screen at the beginning of the game, and 13: P1 goes first
+
+commit 6584656ef7dabac930107d142ac907ea4accfefc
+Author: Oscar Stanford <oestanford@perse.co.uk>
+Date:   Tue Jul 28 13:10:51 2020 +0100
+
+    Completed numbered objective 2: Must input either 't' or 'g' to determine whether to run terminal or GUI, and running without these should raise an error
+
+commit b0ff864cb9450eca111b93d578b6d3621d375028
+Author: Oscar Stanford <oestanford@perse.co.uk>
+Date:   Tue Jul 28 12:54:09 2020 +0100
+
+    Initial files as per the software object model
+
+commit 79e10f02d563fe8d092bc6dcbf6c7628e72e3d29
+Author: OscarS-099 <63352713+OscarS-099@users.noreply.github.com>
+Date:   Mon Jun 29 08:51:44 2020 +0100
+
+    Initial commit

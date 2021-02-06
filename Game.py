@@ -320,7 +320,3 @@ class tempGame(Game):
 
     def getScore(self):
         return self._points[Game.AI] - self._points[self._P1] if self._player == self._P2 else self._points[Game.AI] - self._points[self._P2]
-
-if __name__ == '__main__':
-    # For unit testing
-    pass

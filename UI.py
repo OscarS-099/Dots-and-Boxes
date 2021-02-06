@@ -333,8 +333,3 @@ class Terminal(Ui):
                     print('Not a letter')
                     continue
                 break
-
-if __name__ == '__main__':
-    # For unit testing
-    ui = Gui()
-    ui.run()
