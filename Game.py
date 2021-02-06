@@ -28,8 +28,10 @@ class Game:
         self._colLines = [[Game.EMPTY for _ in range(self._dim)] for _ in range(self._dim-1)]
         #Using seperate 2D arrays for row and column lines allows clearer indexing for lines
         self._boxes = [[Game.EMPTY for _ in range(self._dim-1)] for _ in range(self._dim-1)]
+        #Skill B -> Multi-dimensional arrays
         self._player = self._P1
         self._points = {self._P1:0, self._P2:0}
+        #Skill B -> Dictionaries
         #Using a dictionary for points makes referencing easier than two separate variables
         self._difficulty = difficulty
 
@@ -162,8 +164,10 @@ class Game:
 
     def getInfo(self):
         return [[list(i) for i in self._rowLines],[list(i) for i in self._colLines],self._player,{k:v for (k,v) in self._points.items()},self._dim,self._P1,self._P2]
+        #Skill A -> List operations
 
     def ai(self):
+        #The AI works out what to do
         if self._difficulty == Game.EASY:
             fr = [50,50]
             to = [50,50]
@@ -182,7 +186,8 @@ class Game:
             return fr,to
 
     def __max(self,plies,alpha,beta,info):
-
+        #Trying to maximise the ai's score
+        #Skill A -> Complex user-defined algorithms - minimax
         tG = tempGame(info)
 
         maxv = -100
@@ -202,6 +207,7 @@ class Game:
                         tG.play(fr,to)
                         if tG.getPlayer() == Game.AI:
                             m, minFr, minTo = self.__max(plies+1,alpha,beta,tG.getInfo())
+                            #Skill A -> Recursive algorithms
                             if m < minv:
                                 minv = m
                                 pFr = fr
@@ -227,7 +233,8 @@ class Game:
         return maxv, pFr, pTo
 
     def __min(self,plies,alpha,beta,info):
-
+        #Trying to minimise the player's score
+        #Skill A -> Complex user-defined algorithms - minimax
         tG = tempGame(info)
 
         minv = 100
@@ -247,6 +254,7 @@ class Game:
                         tG.play(fr,to)
                         if tG.getPlayer() != Game.AI:
                             m, maxFr, maxTo = self.__min(plies+1,alpha,beta,tG.getInfo())
+                            #Skill A -> Recursive algorithms
                             if m > maxv:
                                 maxv = m
                                 qFr = fr
@@ -298,12 +306,13 @@ class Game:
 
 
 class tempGame(Game):
-
+    #Skill A -> Complex use of OOP - inheritance
     MIN = 'min'
     MAX = 'max'
 
     def __init__(self, info):
         super(tempGame, self).__init__(info[4], info[5], info[6])
+        #Skill A -> Complex use of OOP - composition
         self._rowLines = info[0]
         self._colLines = info[1]
         self._player = info[2]

@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from Game import Game
+#Skill A -> Files organised for direct access
 from tkinter import Button, Tk, Toplevel, Frame, N,S,E,W,X,Y, LEFT,RIGHT, END, Scrollbar, Text, Message, Grid, StringVar, Label, OptionMenu
 
 class Ui(ABC):
@@ -8,6 +9,8 @@ class Ui(ABC):
         raise NotImplementedError
 
 class Gui(Ui):
+    #Skill A -> Complex use of OOP - inheritance
+
     GUI = 'GUI'
 
     def __init__(self):
@@ -47,6 +50,7 @@ class Gui(Ui):
         Button(helpWin, text='Dismiss', command=self._helpClose).grid(row=1,column=0)
 
     def optionsWinSetup(self):
+        #Setting up the options window
         if self._gameWin:
             return
         optionsWin = Toplevel(self._root)
@@ -105,6 +109,8 @@ class Gui(Ui):
         self._rowButtons = [[Game.EMPTY for _ in range(self._game.getDim()-1)] for _ in range(self._game.getDim())]
         self._colButtons = [[Game.EMPTY for _ in range(self._game.getDim())] for _ in range(self._game.getDim()-1)]
         self._boxOwners = [[Game.EMPTY for _ in range(self._game.getDim()-1)] for _ in range(self._game.getDim()-1)]
+        #Skill B -> multi-dimensional arrays
+
 
         for row in range(0,self._game.getDim()*2,2):
             for col in range(0,self._game.getDim()*2,2):
@@ -154,6 +160,7 @@ class Gui(Ui):
 
 
     def pointWinSetup(self):
+        #Setting up the running total of points window
         pointsWin = Toplevel(self._root)
         pointsWin.title('Score')
         self._pointsWin = pointsWin
@@ -232,6 +239,8 @@ class Gui(Ui):
         self._root.mainloop()
 
 class Terminal(Ui):
+    #Skill A -> Complex use of OOP - inheritance
+
     def __init__(self):
         self._p1Score = 0
         self._p2Score = 0
