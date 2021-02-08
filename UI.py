@@ -73,29 +73,46 @@ class Gui(Ui):
         m = OptionMenu(frame, ai, *ais)
         m.grid(row=1,column=1,sticky=N+S+E+W)
 
+        difficulties = ['Easy','Medium','Hard']
+        difficulty = StringVar()
+        difficulty.set(difficulties[1])
+        m = OptionMenu(frame, difficulty, *difficulties)
+        m.grid(row=2,column=1,sticky=N+S+E+W)
+
         Label(frame,text='Board dimension: ').grid(row=0,column=0,sticky=N+S+E+W)
         Label(frame,text='AI: ').grid(row=1,column=0,sticky=N+S+E+W)
+        Label(frame,text='AI difficulty: ').grid(row=2,column=0,sticky=N+S+E+W)
 
-        cmd = lambda : self.closeOptions(dim,ai)
-        Button(optionsWin, text='Play', command=cmd).grid(row=2,column=0)
+        cmd = lambda : self.closeOptions(dim,ai,difficulty)
+        Button(optionsWin, text='Play', command=cmd).grid(row=3,column=0)
         Grid.rowconfigure(frame,0,weight=1)
         Grid.columnconfigure(frame,0,weight=1)
 
-    def closeOptions(self,dim,ai):
+    def closeOptions(self,dim,ai,difficulty):
         self._dim = int(dim.get())
-        self._ai = ai.get()
+        self._ai = [ai.get(),difficulty.get()]
         self._optionsWin.destroy()
         self.playCallback()
 
 
     def playCallback(self):
         #What happens when the play button is pressed
-        if self._ai == 'None':
+        if self._ai[0] == 'None':
             self._game = Game(self._dim,'P1','P2')
-        elif self._ai == 'Player 1':
-            self._game = Game(self._dim,Game.AI,'P2')
+        elif self._ai[0] == 'Player 1':
+            if self._ai[1] == 'Easy':
+                self._game = Game(self._dim,Game.AI,'P2',Game.EASY)
+            elif self._ai[1] == 'Medium':
+                self._game = Game(self._dim,Game.AI,'P2',Game.MED)
+            else:
+                self._game = Game(self._dim,Game.AI,'P2',Game.HARD)
         else:
-            self._game = Game(self._dim,'P1',Game.AI)
+            if self._ai[1] == 'Easy':
+                self._game = Game(self._dim,'P1',Game.AI,Game.EASY)
+            elif self._ai[1] == 'Medium':
+                self._game = Game(self._dim,'P1',Game.AI,Game.MED)
+            else:
+                self._game = Game(self._dim,'P1',Game.AI,Game.HARD)
 
         self._finished = False
         gameWin = Toplevel(self._root)
@@ -222,9 +239,9 @@ class Gui(Ui):
             self._console.insert(END,'AI\'s turn\nThinking...\n')
             fr, to = self._game.ai()
             if fr[0] == to[0]:
-                self.playRefresh(fr[0],fr[1],Game.VTCL)
+                self.playRefresh(fr[1],fr[0],Game.VTCL)
             else:
-                self.playRefresh(fr[0],fr[1],Game.HZTL)
+                self.playRefresh(fr[1],fr[0],Game.HZTL)
         
     def _gameClose(self):
         self._gameWin.destroy()
